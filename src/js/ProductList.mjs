@@ -1,11 +1,11 @@
+import { renderListWithTemplate } from "./utils.mjs";
+
 function productCartTemplate(product){
-    console.log(product);
-    const imgSrc = product.Image.replace("../images", "/images");
     return (`<li class="product-card">
             <a href="product_pages/?product=${product.Id}">
               <img
-                src="${imgSrc}"
-                alt="${product.NameWithoutBrand}"
+                src="${product.Image}"
+                alt="Image of ${product.NameWithoutBrand}"
               />
               <h3 class="card__brand">${product.Brand.Name}</h3>
               <h2 class="card__name">${product.NameWithoutBrand}</h2>
@@ -27,8 +27,7 @@ class ProductList{
     }
 
     renderList(list){
-        const htmlStrings = list.map(product => productCartTemplate(product));
-        this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+        renderListWithTemplate(productCartTemplate, this.listElement, list, "afterbegin");
     }
 }
 
