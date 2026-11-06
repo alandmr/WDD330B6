@@ -1,6 +1,6 @@
 function productCartTemplate(product){
     console.log(product);
-    const imgSrc = product.Image.replace("../images", "/images");
+    const imgSrc = product.Image;
     return (`<li class="product-card">
             <a href="product_pages/?product=${product.Id}">
               <img
@@ -28,7 +28,7 @@ class ProductList{
 
     renderList(list){
         const htmlStrings = list.map(product => productCartTemplate(product));
-        this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+        this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
     }
 }
 
