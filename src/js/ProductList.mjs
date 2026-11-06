@@ -1,9 +1,10 @@
 function productCartTemplate(product){
     console.log(product);
+    const imgSrc = product.Image.replace("../images", "/images");
     return (`<li class="product-card">
             <a href="product_pages/?product=${product.Id}">
               <img
-                src="${product.Images}"
+                src="${imgSrc}"
                 alt="${product.NameWithoutBrand}"
               />
               <h3 class="card__brand">${product.Brand.Name}</h3>
