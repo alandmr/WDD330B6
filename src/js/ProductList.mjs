@@ -1,15 +1,16 @@
-const productCartTemplate = (product) => {
-    return `<li class="product-card">
-            <a href="product_pages/?product">
+function productCartTemplate(product){
+    console.log(product);
+    return (`<li class="product-card">
+            <a href="product_pages/?product=${product.Id}">
               <img
-                src=""
-                alt=""
+                src="${product.Images}"
+                alt="${product.NameWithoutBrand}"
               />
-              <h3 class="card__brand"></h3>
-              <h2 class="card__name"></h2>
-              <p class="product-card__price">$</p>
+              <h3 class="card__brand">${product.Brand.Name}</h3>
+              <h2 class="card__name">${product.NameWithoutBrand}</h2>
+              <p class="product-card__price">$${product.FinalPrice}</p>
             </a>
-          </li>`;
+          </li>`);
 }
 
 class ProductList{
@@ -25,10 +26,8 @@ class ProductList{
     }
 
     renderList(list){
-        list.forEach(product => {
-            const productTemplate = productCartTemplate(product);
-            this.listElement.appendChild(productTemplate);
-        });
+        const htmlStrings = list.map(product => productCartTemplate(product));
+        this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
     }
 }
 
