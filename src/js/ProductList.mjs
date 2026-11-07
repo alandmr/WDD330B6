@@ -14,7 +14,7 @@ function productCartTemplate(product){
           </li>`);
 }
 
-class ProductList{
+export default class ProductList{
     constructor(category, dataSource, listElement){
         this.category = category;
         this.dataSource = dataSource;
@@ -27,8 +27,8 @@ class ProductList{
     }
 
     renderList(list){
-        renderListWithTemplate(productCartTemplate, this.listElement, list, "afterbegin");
+        const filteredList = list.filter(product => !["989CG", "880RT"].includes(product.Id));
+        renderListWithTemplate(productCartTemplate, this.listElement, filteredList);
     }
 }
 
-export default ProductList;

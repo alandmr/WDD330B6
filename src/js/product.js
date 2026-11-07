@@ -1,59 +1,64 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import ProductDetails from "./ProductDetails.mjs";
 
 const dataSource = new ProductData("tents");
+const productID = getParam("product");
 
-function addProductToCart(product) {
-  let products = getLocalStorage("so-cart") || [];
-  ("");
-  let isNewProduct = true;
+const product = new ProductDetails(productID, dataSource);
+product.init();
 
-  product.Quantity = 1;
+// function addProductToCart(product) {
+//   let products = getLocalStorage("so-cart") || [];
+//   ("");
+//   let isNewProduct = true;
 
-  //Using a Hasmap to set each product by its id
-  //This helps to search a product in the car and avoid duplicates
-  try {
-    const cartMap = new Map();
+//   product.Quantity = 1;
 
-    products.forEach((item) => {
-      cartMap.set(item.Id, item);
-    });
+//   //Using a Hasmap to set each product by its id
+//   //This helps to search a product in the car and avoid duplicates
+//   try {
+//     const cartMap = new Map();
 
-    //If the product already exists
-    //update the quantity
-    if (cartMap.has(product.Id)) {
-      const existingProduct = cartMap.get(product.Id);
+//     products.forEach((item) => {
+//       cartMap.set(item.Id, item);
+//     });
 
-      existingProduct.Quantity += 1;
+//     //If the product already exists
+//     //update the quantity
+//     if (cartMap.has(product.Id)) {
+//       const existingProduct = cartMap.get(product.Id);
 
-      cartMap.set(product.Id, existingProduct);
-      isNewProduct = false;
-    } else {
-      // If not exits, added to it
-      cartMap.set(product.Id, product);
-    }
+//       existingProduct.Quantity += 1;
 
-    //converting HasMap to array so that it can be used in localStorage
-    products = [...cartMap.values()];
-    setLocalStorage("so-cart", products);
-  } catch (error) {
-    console.error("Error:", error);
-  }
+//       cartMap.set(product.Id, existingProduct);
+//       isNewProduct = false;
+//     } else {
+//       // If not exits, added to it
+//       cartMap.set(product.Id, product);
+//     }
 
-  //Alert the user that the product has been addded to his/her cart.
-  const message = isNewProduct
-    ? "Product added to cart"
-    : "One more has been added to your cart";
-  alert(message);
-  return;
-}
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
-}
+//     //converting HasMap to array so that it can be used in localStorage
+//     products = [...cartMap.values()];
+//     setLocalStorage("so-cart", products);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
 
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+//   //Alert the user that the product has been addded to his/her cart.
+//   const message = isNewProduct
+//     ? "Product added to cart"
+//     : "One more has been added to your cart";
+//   alert(message);
+//   return;
+// }
+// // add to cart button event handler
+// async function addToCartHandler(e) {
+//   const product = await dataSource.findProductById(e.target.dataset.id);
+//   addProductToCart(product);
+// }
+
+// // add listener to Add to Cart button
+// document
+//   .getElementById("addToCart")
+//   .addEventListener("click", addToCartHandler);
