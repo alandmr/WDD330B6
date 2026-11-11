@@ -322,6 +322,20 @@ button {
   transform: scale(1.15);
 } */
 
+.cart-footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/** Hide Elements **/
+.hide{
+  display: none;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -335,6 +349,10 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px 1fr 120px;
+  }
+
+  .cart-footer {
+    flex-direction: row;
   }
 }
 
