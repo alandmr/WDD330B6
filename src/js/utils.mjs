@@ -38,3 +38,21 @@ export function renderListWithTemplate(template, parentElement, list, position =
    }   
    parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+// show the number of items in the cart on the backpack icon
+export function updateCartCount() {
+  const cart = getLocalStorage("so-cart") || [];
+  const total = cart.reduce((sum, item) => sum + (item.Quantity || 1), 0);
+  const cartLink = document.querySelector(".cart");
+  if (!cartLink) return;
+
+  let badge = cartLink.querySelector(".cart-count");
+  if (!badge) {
+    badge = document.createElement("span");
+    badge.className = "cart-count";
+    cartLink.append(badge);
+  }
+
+  badge.textContent = total;
+  badge.hidden = total === 0;
+}
