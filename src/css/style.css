@@ -360,3 +360,49 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+/* Quick view (product modal) */
+.quick-view-btn {
+  margin-top: 0.5em;
+  width: 100%;
+  font-size: var(--small-font);
+}
+
+.quick-view {
+  max-width: 400px;
+  width: 90%;
+  padding: 1.5em;
+  border: none;
+  border-radius: 6px;
+}
+
+.quick-view::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+
+.quick-view img {
+  max-width: 100%;
+}
+
+.quick-view h2,
+.quick-view h3,
+.quick-view p {
+  margin: 0.4em 0;
+}
+
+.quick-view__close {
+  float: right;
+  padding: 0 0.4em;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.quick-view__description {
+  font-size: var(--small-font);
+}
+
+.quick-view__details {
+  display: inline-block;
+  margin-top: 0.5em;
+  color: var(--tertiary-color);
+}
