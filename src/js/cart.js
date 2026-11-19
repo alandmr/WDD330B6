@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter, setLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -79,6 +79,10 @@ function showTotal() {
   totalElement.textContent = total;
 }
 
+//load header and footer dinamically
+loadHeaderFooter();
+
+//render products dinamically
 renderCartContents();
 
 // This piece of code adds an event listener to the product list, and when a click event occurs, it checks if the clicked element
