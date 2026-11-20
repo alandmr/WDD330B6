@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, } from "./utils.mjs"
+import { getLocalStorage, setLocalStorage, renderCartItemsCount } from "./utils.mjs"
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -10,8 +10,7 @@ export default class ProductDetails {
     async init() {
         // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
         this.product = await this.dataSource.findProductById(this.productId);
-        // the product details are needed before rendering the HTML
-        console.log(this.product)
+        // the product details are needed before rendering the HTML        
         this.renderProductDetails();
         // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
         // the product details are needed before rendering the HTML
@@ -40,6 +39,7 @@ export default class ProductDetails {
             ? "Product added to cart"
             : "One more has been added to your cart";
         alert(message);
+        renderCartItemsCount();
     }
     
     renderProductDetails() {

@@ -1,9 +1,13 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
-import { getParam, loadHeaderFooter } from "./utils.mjs";
+import { getParam, loadHeaderFooter, renderCartItemsCount } from "./utils.mjs";
 
-//loads header and footer elements dinamically
-loadHeaderFooter();
+document.addEventListener("DOMContentLoaded", async() => {
+    //loads header and footer elements dinamically
+    await loadHeaderFooter();  
+    //renders the number of items in the cart  
+    renderCartItemsCount();
+});
 
 const category = getParam("category");
 const categoryTitle = document.getElementById("category");
