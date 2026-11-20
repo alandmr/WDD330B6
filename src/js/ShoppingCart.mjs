@@ -53,41 +53,10 @@ export default class ShoppingCart {
         //otherwise render content
         //and display total in cart
         renderListWithTemplate(cartItemTemplate, productList, [...this.cartItems], "afterbegin", clearCart);
-        this.showTotal();
+        // this.showTotal();
+        this.calulateCartTotalItems(this.cartItems);
     }
 
-    /** Calculates the total in cart
-    *  @returns {number} `total` or `0` when cart is empty
-    */
-    calculateTotal(){
-        //Empty cart
-        if (this.cartItems === null || this.cartItems.length === 0) {
-            return 0;
-        }
-
-        let total = 0;
-        this.cartItems.forEach((item) => (total += item.FinalPrice * item.Quantity));
-        return parseFloat(total).toFixed(2);
-    }
-
-    /** Displays the total in cart and displays it to the user
-     * @returns {void}
-     */
-    showTotal(){
-        const cartFooter = document.querySelector(".cart-footer");
-        const total = this.calculateTotal();
-
-        //hide cart-footer if cart is empty
-        if (total === 0 && !cartFooter.classList.contains("hide")) {
-            cartFooter.classList.add("hide");
-            return;
-        }
-
-        //otherwise
-        cartFooter.classList.remove("hide");
-        const totalElement = document.getElementById("cart-total");
-        totalElement.textContent = total;
-    }
 
     /** Receive the parameter 'index' from the data-index attribute of the button */
     removeItemFromCart(index){
@@ -101,7 +70,7 @@ export default class ShoppingCart {
     /** This piece of code adds an event listener to the product list, and when a click event occurs, it checks if the clicked element
     * has the class 'remove-btn'. If it does, it calls the removeItemFromCart function with the index of the item to be removed, which is stored in the data-index attribute of the button.*/
     setupRemoveEvent(){
-      const showTotal = this.showTotal.bind(this);
+      
       const removeItemFromCart = this.removeItemFromCart.bind(this);
 
       document.addEventListener("click", (e) => {
@@ -111,9 +80,10 @@ export default class ShoppingCart {
           const index = btn.dataset.index;
           removeItemFromCart(index);
 
-          //update total in cart;
-          showTotal();
+          //update total in cart;   
+                
           renderCartItemsCount();
+          
           return;
         })
     }
@@ -155,8 +125,6 @@ export default class ShoppingCart {
     // Volver a renderizar
     this.renderCart();
 
-    // Actualizar total
-    this.showTotal();
 
     // Actualizar contador del ícono del carrito
     renderCartItemsCount();
@@ -172,6 +140,30 @@ export default class ShoppingCart {
       this.editItem(btn.dataset.id);
     });
   }
+
+  calulateCartTotalItems(cartItems) {
+  const cartFooter = document.querySelector(".cart-footer");
+  const cartTotal = document.querySelector(".cart-total");
+  const cartTotalItems = document.querySelector(".cart-total-items");
+
+  if (cartItems.length > 0) {
+    cartFooter.classList.remove("hide");
+    const total = cartItems.reduce((sum, cartItem) =>
+      sum + (cartItem.FinalPrice * cartItem.Quantity), 0);
+
+    const totalItems = cartItems.reduce((sum, item) => 
+      sum + item.Quantity, 0);
+
+
+    cartTotalItems.innerHTML = `<span>Products in cart:</span><span>${totalItems}</span>`;
+    cartTotal.innerHTML = `<span>Total:</span><span>$${total.toFixed(2)}</span>`;
+    
+  }
+  else {
+    cartFooter.classList.replace("cart-footer", "hide");
+  }
+}
+
 }
 
 
