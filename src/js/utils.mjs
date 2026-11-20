@@ -80,3 +80,14 @@ export async function loadHeaderFooter(){
       renderWithTemplate(footerTemplate, footerElement);
     }
 }
+
+/** Helps to calculate the discount of a product
+ * @returns { null | number} `number` discount percent and `null` when there is not a discount.
+ */
+export function getDiscountPercent(product){
+   const retail = product.SuggestedRetailPrice;
+   const final = product.FinalPrice;
+   if (!retail || final >= retail) return null;
+   const percent = Math.round(((retail - final) / retail) * 100);
+   return percent; 
+}
