@@ -12,4 +12,4 @@ document.addEventListener("DOMContentLoaded", async() => {
     //Loads shopping cart and its functionality
     const sCart = new ShoppingCart();
     sCart.init();
-});
+});          
