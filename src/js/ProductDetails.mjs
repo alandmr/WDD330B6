@@ -8,9 +8,10 @@ export default class ProductDetails {
     }
 
     async init() {
-            // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
+        // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
         this.product = await this.dataSource.findProductById(this.productId);
         // the product details are needed before rendering the HTML
+        console.log(this.product)
         this.renderProductDetails();
         // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
         // the product details are needed before rendering the HTML
@@ -52,12 +53,12 @@ function productDetailsTemplate(product) {
     document.querySelector("h3").textContent = product.NameWithoutBrand;
 
     const productImage = document.getElementById("productImage");
-    productImage.src = product.Image;
+    productImage.src = product.Images.PrimaryLarge;
     productImage.alt = product.NameWithoutBrand;
 
 
 
-    document.getElementById("productPrice").textContent = product.FinalPrice;
+    document.getElementById("productPrice").textContent = `$${product.FinalPrice}`;
     document.getElementById("productColor").textContent = product.Colors[0].ColorName;
     document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
 

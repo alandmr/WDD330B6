@@ -2,9 +2,9 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function productCartTemplate(product) {
   return `<li class="product-card">
-            <a href="product_pages/?product=${product.Id}">
+            <a href="/product_pages/?product=${product.Id}">
               <img
-                src="${product.Image}"
+                src="${product.Images.PrimaryMedium}"
                 alt="Image of ${product.NameWithoutBrand}"
               />
               <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -17,7 +17,7 @@ function productCartTemplate(product) {
 
 function quickViewTemplate(product) {
   return `<button class="quick-view__close" aria-label="Close quick view">&times;</button>
-    <img src="${product.Image}" alt="Image of ${product.NameWithoutBrand}" />
+    <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.NameWithoutBrand}" />
     <h3 class="card__brand">${product.Brand.Name}</h3>
     <h2 class="card__name">${product.NameWithoutBrand}</h2>
     <p class="quick-view__color">${product.Colors[0].ColorName}</p>
@@ -35,7 +35,7 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list);
     this.initQuickView();
   }
@@ -48,6 +48,8 @@ export default class ProductList {
       productCartTemplate,
       this.listElement,
       this.products,
+      "afterbegin",
+      true
     );
   }
 

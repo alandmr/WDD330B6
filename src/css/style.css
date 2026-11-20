@@ -170,16 +170,25 @@ button {
 
 /* Styles for product lists */
 .product-card {
-  flex: 1 1 45%;
-  margin: 0.25em;
-  padding: 0.5em;
   border: 1px solid var(--light-grey);
+  margin: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
   max-width: 250px;
 }
 
-.product-card h2,
-.product-card h3,
-.product-card p {
+.product-card > a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-card a > h2,
+.product-card a > h3,
+.product-card a > p {
   margin: 0.5em 0;
 }
 
@@ -299,29 +308,6 @@ button {
   transform: scale(1.15);
 }
 
-/* .remove-btn {
-  position: absolute;
-  top: 20px;
-  right: 10px;
-
-  width: 36px;
-  height: 36px;
-
-  border: none;
-  background: transparent;
-
-  color: #999;
-  font-size: 1rem;
-
-  cursor: pointer;
-  transition: all .3s ease;
-}
-
-.remove-btn:hover {
-  color: #d9534f;
-  transform: scale(1.15);
-} */
-
 .cart-footer {
   display: flex;
   flex-direction: column;
@@ -336,34 +322,9 @@ button {
   display: none;
 }
 
-@media screen and (min-width: 500px) {
-  body {
-    max-width: 1080px;
-    margin: auto;
-  }
-
-  .mission {
-    font-size: 1.2em;
-  }
-
-  .cart-card {
-    font-size: inherit;
-    grid-template-columns: 150px 1fr 120px;
-  }
-
-  .cart-footer {
-    flex-direction: row;
-  }
-}
-
-footer {
-  font-size: var(--small-font);
-  padding: 1em;
-}
-
 /* Quick view (product modal) */
 .quick-view-btn {
-  margin-top: 0.5em;
+  margin: 0;
   width: 100%;
   font-size: var(--small-font);
 }
@@ -405,4 +366,72 @@ footer {
   display: inline-block;
   margin-top: 0.5em;
   color: var(--tertiary-color);
+}
+
+/** Custom Styles **/
+.categories {
+  margin: 40px auto;
+  text-align: center;
+}
+
+.category-list {
+  width: 100%;
+  list-style: none;
+  margin-inline-start: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.invisible-link {
+  text-decoration: none;
+}
+
+.svg-link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: black;
+  padding: 10px;
+}
+
+.svg-link:hover {
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+
+.svg-link > img {
+  margin: 0 auto;
+  height: 120px;
+  width: 120px;
+}
+
+footer {
+  font-size: var(--small-font);
+  padding: 1em;
+}
+
+@media screen and (min-width: 500px) {
+  body {
+    max-width: 1080px;
+    margin: auto;
+  }
+
+  .mission {
+    font-size: 1.2em;
+  }
+
+  .cart-card {
+    font-size: inherit;
+    grid-template-columns: 150px 1fr 120px;
+  }
+
+  .cart-footer {
+    flex-direction: row;
+  }
+
+  .category-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
