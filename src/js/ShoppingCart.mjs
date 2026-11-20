@@ -5,7 +5,7 @@ function cartItemTemplate(item, i) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
@@ -31,7 +31,7 @@ export default class ShoppingCart {
     this.setupRemoveEvent();
   }
 
-  renderCart(clearCart=false) {
+  renderCart(clearCart = false) {
         const productList = document.querySelector(".product-list");
         
         // If there are no items in the cart, display a message
@@ -57,7 +57,7 @@ export default class ShoppingCart {
 
         let total = 0;
         this.cartItems.forEach((item) => (total += item.FinalPrice * item.Quantity));
-        return total;
+        return parseFloat(total).toFixed(2);
     }
 
     /** Displays the total in cart and displays it to the user
