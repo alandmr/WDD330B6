@@ -1,4 +1,8 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter,renderCartItemsCount } from "./utils.mjs";
 
 //loads header and footer elements dinamically
-loadHeaderFooter();
+document.addEventListener("DOMContentLoaded", async() => {
+    await loadHeaderFooter();    
+    renderCartItemsCount();
+});
+
