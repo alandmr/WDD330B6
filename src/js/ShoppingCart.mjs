@@ -31,7 +31,7 @@ export default class ShoppingCart {
     this.setupRemoveEvent();
   }
 
-  renderCart(clearCart=false) {
+  renderCart(clearCart = false) {
         const productList = document.querySelector(".product-list");
         
         // If there are no items in the cart, display a message
