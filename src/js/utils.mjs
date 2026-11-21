@@ -81,6 +81,17 @@ export async function loadHeaderFooter(){
     }
 }
 
+/** Helps to calculate the discount of a product
+ * @returns { null | number} `number` discount percent and `null` when there is not a discount.
+ */
+export function getDiscountPercent(product){
+   const retail = product.SuggestedRetailPrice;
+   const final = product.FinalPrice;
+   if (!retail || final >= retail) return null;
+   const percent = Math.round(((retail - final) / retail) * 100);
+   return percent; 
+}
+
 // Add a function to render the cart items count in the backpack
 export function renderCartItemsCount() {
   const storedCart = getLocalStorage("so-cart") || [];
@@ -95,15 +106,12 @@ export function renderCartItemsCount() {
   if (!cartClassElement) return;
 
   if (totalCount > 0) {
-    
     if (cartClassElement.classList.contains("none")) {
-      cartClassElement.classList.replace("none", "cart-cant-items");
-      
-    }
+        cartClassElement.classList.replace("none", "cart-cant-items");
+      }
     cartClassElement.textContent = totalCount;
   } else {
-   
-    cartClassElement.classList.replace("cart-cant-items", "none");
-    cartClassElement.textContent = "";
-  }
+      cartClassElement.classList.replace("cart-cant-items", "none");
+      cartClassElement.textContent = "";
+    }
 }

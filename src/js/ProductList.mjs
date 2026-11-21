@@ -1,10 +1,8 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { getDiscountPercent, renderListWithTemplate } from "./utils.mjs";
 
 function discountBadge(product) {
-  const retail = product.SuggestedRetailPrice;
-  const final = product.FinalPrice;
-  if (!retail || final >= retail) return "";
-  const percent = Math.round(((retail - final) / retail) * 100);
+  const percent = getDiscountPercent(product);
+  if(!percent) return "";
   return `<span class="discount-badge">${percent}% off</span>`;
 }
 

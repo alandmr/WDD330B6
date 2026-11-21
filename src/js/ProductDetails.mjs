@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, renderCartItemsCount } from "./utils.mjs"
+import { getLocalStorage, setLocalStorage, renderCartItemsCount, getDiscountPercent } from "./utils.mjs"
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -48,6 +48,13 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
+
+    const discountPercent = getDiscountPercent(product);
+    if(discountPercent){
+        const discountBadge = document.querySelector(".discount-badge");
+        discountBadge.classList.remove("hide");
+        discountBadge.textContent = `${discountPercent}% off`;
+    } 
     
     document.querySelector("h2").textContent = product.Brand.Name;
     document.querySelector("h3").textContent = product.NameWithoutBrand;
