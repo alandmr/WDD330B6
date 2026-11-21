@@ -121,7 +121,6 @@ button {
   padding-top: 1em;
   position: relative;
   text-align: center;
-
 }
 
 .cart svg {
@@ -372,9 +371,6 @@ button {
 
   cursor: pointer;
   text-align: center;
-}
-
-.checkout-btn a {
   color: white;
   text-decoration: none;
 }
@@ -411,7 +407,8 @@ button {
   font-weight: bold;
 }
 
-.cart-total, .cart-total-items span {
+.cart-total,
+.cart-total-items span {
   color: #6b7600;
 }
 
@@ -419,20 +416,19 @@ button {
   color: #4229ff;
 }
 
-
 /** Hide Elements **/
 .hide {
   display: none;
 }
 
 .product-detail > .discount-badge {
-   display: block;
-   position: relative;
-   max-width: 70px;
+  display: block;
+  position: relative;
+  max-width: 70px;
 
-   &.hide{
-     display: none;
-   }
+  &.hide {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 500px) {
@@ -449,7 +445,6 @@ button {
     font-size: inherit;
     grid-template-columns: 150px 1fr 120px;
   }
-  
 }
 
 footer {
@@ -600,7 +595,7 @@ footer {
   border-radius: 8px;
   padding: 1.5rem;
   height: fit-content;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .order-summary p {
@@ -633,8 +628,6 @@ footer {
   .category-list {
     grid-template-columns: repeat(4, 1fr);
   }
-
-
 }
 
 footer {
