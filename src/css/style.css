@@ -610,6 +610,36 @@ footer {
   color: #667300;
 }
 
+/* Styles for alert messages */
+
+.alert-list {
+  margin-bottom: 1rem;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4a742;
+  color: #222;
+  padding: 0.75rem 1rem;
+  border: 1px solid #c97a00;
+  font-size: 1rem;
+}
+
+.alert-item + .alert-item {
+  border-top: none;
+}
+
+.close-alert {    
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: inherit;
+  margin:inherit;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

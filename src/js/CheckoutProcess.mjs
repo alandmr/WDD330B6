@@ -87,28 +87,24 @@ export default class CheckoutProcess {
     order.shipping = this.shipping;
     order.items = packageItems(this.list);
 
-    try {
-      const response = await services.checkout(order);
-      console.log(response);
-      setLocalStorage("so-cart", []);
-      document.querySelector(".checkout-form").reset();
-      const summaryElement = document.querySelector(this.outputSelector + " #subtotal");
-      const tax = document.querySelector(`${this.outputSelector} #tax`);
-      const shipping = document.querySelector(`${this.outputSelector} #shipping`);
-      const orderTotal = document.querySelector(`${this.outputSelector} #orderTotal`);
 
-      summaryElement.innerHTML = "$0.00";
-      tax.innerHTML = "$0.00";
-      shipping.innerHTML = "$0.00";
-      orderTotal.innerHTML = "$0.00";
+    await services.checkout(order);
 
-      renderCartItemsCount();
-      
-      alert("Success, Order Placed with Order Id: 4");
-      window.location.href = "/";
+    setLocalStorage("so-cart", []);
+    document.querySelector(".checkout-form").reset();
+    const summaryElement = document.querySelector(this.outputSelector + " #subtotal");
+    const tax = document.querySelector(`${this.outputSelector} #tax`);
+    const shipping = document.querySelector(`${this.outputSelector} #shipping`);
+    const orderTotal = document.querySelector(`${this.outputSelector} #orderTotal`);
 
-    } catch (err) {
-      console.log(err);
-    }
+    summaryElement.innerHTML = "$0.00";
+    tax.innerHTML = "$0.00";
+    shipping.innerHTML = "$0.00";
+    orderTotal.innerHTML = "$0.00";
+
+    renderCartItemsCount();
+    
+    alert("Success, Order Placed with Order Id: 4");
+    window.location.href = "/";
   }
 }
