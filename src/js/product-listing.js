@@ -7,6 +7,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadHeaderFooter();
   //renders the number of items in the cart
   renderCartItemsCount();
+
+  const products = await dataSource.getData(category);
+  Breadcrumb([
+    {
+      label: `${capitalizeFirstLetter(category)} → (${products.length} items)`
+    }
+  ]);
+
+  await productList.init();
 });
 
 const category = getParam("category");
@@ -15,14 +24,6 @@ categoryTitle.textContent = category;
 
 
 const dataSource = new ProductData(category);
-const products = await dataSource.getData(category);
+
 const element = document.querySelector(".product-list");
 const productList = new ProductList(category, dataSource, element);
-
-Breadcrumb([
-  {
-    label: `${capitalizeFirstLetter(category)} → (${products.length} items)`
-  }
-]);
-
-productList.init();
