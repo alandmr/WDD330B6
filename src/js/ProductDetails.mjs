@@ -1,4 +1,10 @@
-import { getLocalStorage, setLocalStorage, renderCartItemsCount, getDiscountPercent } from "./utils.mjs"
+import { getLocalStorage, 
+            setLocalStorage, 
+            renderCartItemsCount, 
+            getDiscountPercent, 
+            Breadcrumb,
+            capitalizeFirstLetter 
+        } from "./utils.mjs"
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -12,6 +18,16 @@ export default class ProductDetails {
         this.product = await this.dataSource.findProductById(this.productId);
         // the product details are needed before rendering the HTML        
         this.renderProductDetails();
+
+        Breadcrumb([
+        {
+            label: capitalizeFirstLetter(this.product.Category) + " →",
+            url: `/product_listing/?category=${this.product.Category}`
+        },
+        {
+            label: this.product.Name
+        }
+        ]);
         // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
         // the product details are needed before rendering the HTML
         // once the HTML is rendered, add a listener to the Add to Cart button

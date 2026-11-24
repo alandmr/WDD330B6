@@ -145,3 +145,34 @@ export function alertMessage(message, scroll = true) {
   if(scroll)
     window.scrollTo(0,0);
 }
+
+export function Breadcrumb(items = []) {
+  const breadcrumb = document.querySelector("#breadcrumb-list");
+
+  if (!breadcrumb) return;
+
+  if (items.length === 0) {
+    breadcrumb.parentElement.style.display = "none";
+    return;
+  }
+
+  breadcrumb.parentElement.style.display = "block";
+
+  breadcrumb.innerHTML = items
+    .map(
+      (item, index) => `
+        <li>
+          ${
+            index < items.length - 1
+              ? `<a href="${item.url || "#"}">${item.label}</a>`
+              : `<span>${item.label}</span>`
+          }
+        </li>
+      `
+    )
+    .join("");
+}
+
+export function capitalizeFirstLetter(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}

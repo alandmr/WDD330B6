@@ -48,9 +48,7 @@ export default class ProductList {
   }
 
   renderList(list) {
-    this.products = list.filter(
-      (product) => !["989CG", "880RT"].includes(product.Id),
-    );
+    this.products = list;
     renderListWithTemplate(
       productCartTemplate,
       this.listElement,
